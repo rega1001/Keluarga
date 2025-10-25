@@ -1,0 +1,99 @@
+/* ATUR SCROLLBAR */
+html, body {
+    overflow: auto;          /* tetap bisa scroll */
+    scrollbar-width: none;   /* Firefox */
+    -ms-overflow-style: none; /* IE dan Edge lama */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge baru */
+}
+html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge baru */
+}
+
+/* ATUR BODY DAN GRID */
+body {
+    margin: 0;
+    font-family: "Times New Roman", serif;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    height: 100vh;
+    background-color: white;
+}
+
+
+/* BAGIAN KONTEN */
+img {
+    width: 20px;
+    height: auto;
+}
+
+.content-title{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    padding-top: 2vh;
+    align-items: center;
+    justify-items: center;
+}
+
+.content-section {
+    display: none; 
+}
+
+.content-section.active {
+    display: flex;
+    transform: translateX(0);
+    align-items: center;
+    justify-content: center;
+    max-width: calc(100vw - 200px);
+    margin: auto;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.panel {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    width: 40px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.panel:hover {
+    filter: brightness(1.2);
+}
+
+.panel.active {
+    filter: brightness(1.15);
+    width: calc(100vw - 80px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    cursor: default;
+}
+
+.home { background-color: #ffffff; }
+.family { background-color: #f55449; }
+.history { background-color: #f4b000; }
+
+.judul {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: black;
+    transform: rotate(0deg);
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.panel.active .judul {
+    display: none;
+}
+
+/* DESAIN BAGIAN HOME */
+.welcome{
+    font-size: 8rem;
+    text-align: center;
+}
