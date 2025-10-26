@@ -1,3 +1,10 @@
+/* VARIABEL GLOBAL */
+:root {
+    --panel-width-collapsed: 40px;
+    --panel-width-expanded: calc(100vw - 80px);
+    --content-max-width: calc(100vw - 200px);
+}
+
 /* ATUR SCROLLBAR */
 html, body {
     overflow: auto;          /* tetap bisa scroll */
@@ -11,6 +18,22 @@ body::-webkit-scrollbar {
 html::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge baru */
 }
+.family-tree {
+    overflow-y: auto;          /* tetap bisa scroll */
+    scrollbar-width: none;   /* Firefox */
+    -ms-overflow-style: none; /* IE dan Edge lama */
+}
+.family-tree::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge baru */
+}
+
+/* ATUR PRIVASI */
+img {
+  pointer-events: none; 
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 
 /* ATUR BODY DAN GRID */
 body {
@@ -18,13 +41,14 @@ body {
     font-family: "Times New Roman", serif;
     display: grid;
     grid-template-columns: repeat(3, max-content);
-    height: 100vh;
+    height: 100svh;
     background-color: white;
 }
 
 
 /* BAGIAN KONTEN */
-img {
+.content-title img {
+    padding-top: 2svh;
     width: 20px;
     height: auto;
 }
@@ -32,8 +56,7 @@ img {
 .content-title{
     display: grid;
     grid-template-rows: auto 1fr;
-    height: 100vh;
-    padding-top: 2vh;
+    height: 100svh;
     align-items: center;
     justify-items: center;
 }
@@ -43,13 +66,12 @@ img {
 }
 
 .content-section.active {
-    display: flex;
-    transform: translateX(0);
+    display: grid;
     align-items: center;
     justify-content: center;
-    max-width: calc(100vw - 200px);
+    max-width: var(--content-max-width);
     margin: auto;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: all 1s ease;
 }
 
 .panel {
@@ -60,7 +82,7 @@ img {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 1s ease;
 }
 
 .panel:hover {
@@ -70,7 +92,7 @@ img {
 .panel.active {
     filter: brightness(1.15);
     width: calc(100vw - 80px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: all 1s ease;
     cursor: default;
 }
 
@@ -92,8 +114,56 @@ img {
     display: none;
 }
 
+
+/* DESAIN BAGIAN FAMILY TREE */
+.family-tree {
+    display: none;
+    opacity: 0;
+}
+.family-tree.active {
+    display: grid;
+    opacity: 1;
+    grid-template-rows: 3rem repeat(3, clamp(50px, 10vw, 125px));
+    height: calc(100svh - 40px);
+    width: var(--content-max-width);
+    padding: 20px 0;
+    text-align: start;
+    justify-items: center;
+    overflow-y: auto;
+}
+.family-tree h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: bold;
+    margin: 0;
+}
+
+.layer1 img {
+    width: clamp(10px, 10vw, 125px);
+}
+.layer2 img {
+    width: clamp(5px, 8vw, 100px);
+}
+.layer2 {
+    display: grid;
+    grid-template-columns: repeat(4, clamp(5px, 18vw, 220px));
+    gap: 1vw;
+    justify-items: center;
+}
+
+/* DESAIN BAGIAN HISTORY */
+
 /* DESAIN BAGIAN HOME */
-.welcome{
-    font-size: 8rem;
+.welcome.active{
+    display: grid;
+    grid-template-rows: auto auto;
     text-align: center;
+}
+.welcome h1 {
+    font-size: clamp(2rem, 10vw, 8rem);
+    margin: 0;
+}
+.welcome p {
+    font-size: clamp(0.5rem, 2vw, 1.2rem);
+    margin: 0;
+    max-width: 60vw;
 }
